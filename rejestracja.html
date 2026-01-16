@@ -20,35 +20,37 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            position: relative;
+            position: relative; /* Umożliwia pozycjonowanie absolutne przycisku względem body */
         }
 
         /* STYL PRZYCISKU POWROTU (LEWY GÓRNY RÓG) */
-        .btn-home {
+        .back-home-button {
             position: absolute;
-            top: 25px;
-            left: 25px;
+            top: 20px;
+            left: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            background-color: #4fb5a9; /* Kolor morski z obrazka */
+            gap: 12px;
+            background-color: #4fb5a9; /* Kolor z Twojej grafiki */
             color: white;
-            padding: 12px 25px;
+            padding: 10px 25px;
             text-decoration: none;
-            border-radius: 50px; /* Zaokrąglone brzegi (pill style) */
+            border-radius: 50px; /* Zaokrąglony kształt pigułki */
             font-weight: bold;
             font-size: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Delikatny cień */
+            transition: all 0.3s ease;
+            z-index: 1000;
         }
 
-        .btn-home:hover {
+        .back-home-button:hover {
             background-color: #3d9287;
-            transform: translateY(-2px);
+            transform: scale(1.05); /* Lekkie powiększenie przy najechaniu */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .btn-home i {
-            font-size: 18px;
+        .back-home-button i {
+            font-size: 18px; /* Rozmiar strzałki */
         }
 
         /* STYL DLA FORMULARZA REJESTRACJI */
@@ -134,7 +136,7 @@
 </head>
 <body>
 
-    <a href="rementorek.html" class="btn-home">
+    <a href="index.html" class="back-home-button">
         <i class="fa-solid fa-arrow-left"></i> Strona Główna
     </a>
 
