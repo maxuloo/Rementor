@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMENTOR - Kompleksowe Usługi Remontowe</title>
+    <style>
+        /* ==================================== */
+        /* ZARZĄDZANIE STYLAMI I RESET */
+        /* ==================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth; /* Płynne przewijanie do sekcji */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================================== */
+        /* NAGŁÓWEK (HEADER) I NAWIGACJA */
+        /* ==================================== */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: white;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo img {
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 30px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4fb5a9;
+        }
+
+        /* ==================================== */
+        /* SEKCJA HERO (GŁÓWNA) */
+        /* ==================================== */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .hero-button {
+            background-color: #4fb5a9;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .hero-button:hover {
+            background-color: #3e8e82;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==================================== */
+        /* SEKCJA O NAS */
+        /* ==================================== */
+        .about-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+
+        .about-section h2 {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==================================== */
+        /* SEKCJA USŁUGI */
+        /* ==================================== */
+        .services {
+            padding: 60px 0 100px;
+            background-color: #ffffff;
+        }
+
+        .services h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-item {
+            background: #f9f9f9;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: #008080;
+            margin-bottom: 15px;
+        }
+
+        .service-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .service-item p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* ==================================== */
+        /* SEKCJA GALERIA */
+        /* ==================================== */
+        .gallery-section {
+            padding: 60px 0 100px;
+            background-color: #f1f7f6;
+        }
+
+        .gallery-section h2 {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* ==================================== */
+        /* SEKCJA WYCENA (FORMULARZ) */
+        /* ==================================== */
+        .quote-section {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+
+        .quote-section h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .quote-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #f1f7f6;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* [STYLE FORMULARZA] ... (z poprzedniej odpowiedzi) */
+        .quote-form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .quote-form-container input[type="text"],
+        .quote-form-container input[type="email"],
+        .quote-form-container input[type="tel"],
+        .quote-form-container select,
+        .quote-form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .quote-form-container textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row > div {
+            flex: 1;
+        }
+
+        .quote-form-container button {
+            background-color: #4fb5a9;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .quote-form-container button:hover {
+            background-color: #3e8e82;
+        }
+
+        .checkbox-group {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: normal;
+        }
+
+        /* ==================================== */
+        /* SEKCJA KONTAKT */
+        /* ==================================== */
+        .contact-section {
+            padding: 80px 0 100px;
+            background-color: #ffffff;
+        }
+
+        .contact-section h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .contact-content {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4fb5a9;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .info-item strong {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .social-media {
+            margin-top: 30px;
+        }
+
+        .social-media a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 30px;
+            color: #4fb5a9;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: #333;
+        }
+        
+        /* [STYLE FORMULARZA KONTAKTOWEGO] (używamy tego samego stylu co dla wyceny, ale dostosowujemy nagłówki) */
+        
+        .contact-form form input[type="text"],
+        .contact-form form input[type="email"],
+        .contact-form form textarea {
+            /* używa stylów z quote-form-container */
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .contact-form form button {
+             /* używa stylów z quote-form-container */
+             background-color: #4fb5a9;
+             color: white;
+             padding: 12px 25px;
+             border: none;
+             border-radius: 4px;
+             cursor: pointer;
+             font-size: 18px;
+             font-weight: bold;
+             transition: background-color 0.3s;
+        }
+        
+        .contact-form form button:hover {
+            background-color: #3e8e82;
+        }
+
+        /* ==================================== */
+        /* STOPKA (FOOTER) */
+        /* ==================================== */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #4fb5a9;
+            text-decoration: none;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#hero" class="logo">
+                <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom">
+                REMENTOR
+            </a>
+            <nav class="nav-links">
+                <a href="#about">O nas</a>
+                <a href="#services">Usługi</a>
+                <a href="#gallery">Galeria</a>
+                <a href="#contact">Kontakt</a>
+                <a href="#quote-form" class="hero-button" style="margin-left: 20px; padding: 10px 20px;">Wycena</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="container" style="display: flex; align-items: center;">
+            <div class="hero-text">
+                <h1>Kompleksowe usługi remontowe</h1>
+                <p>Zmień swoje wnętrze dzięki profesjonalnym usługom remontowym</p>
+                <a href="#quote-form" class="hero-button">Zapytaj o wycenę</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://i.ibb.co/6P0jR1q/wnetrze.jpg" alt="Wnętrze po remoncie z sofą i drabiną">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>O nas - Twoi eksperci od remontów</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Firma **REMENTOR** została założona z pasji do tworzenia pięknych i funkcjonalnych przestrzeni. Od lat pomagamy naszym klientom w realizacji ich marzeń o idealnym domu lub mieszkaniu. Nasz zespół składa się z doświadczonych fachowców, którzy z najwyższą dbałością o szczegóły zajmą się każdym aspektem Twojego remontu.</p>
+                    <p>Stawiamy na **jakość, terminowość i transparentność**. Wierzymy, że komunikacja jest kluczem do sukcesu, dlatego zawsze jesteśmy do dyspozycji, aby omówić postępy prac i odpowiedzieć na wszelkie pytania. Niezależnie od tego, czy potrzebujesz odświeżenia jednego pokoju, czy kompleksowej metamorfozy całego wnętrza, REMENTOR jest Twoim zaufanym partnerem.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://picsum.photos/id/190/400/300" alt="Zdjęcie zespołu REMENTOR">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Nasze usługi</h2>
+            <div class="services-grid">
+                
+                <div class="service-item">
+                    <div class="service-icon">🎨</div>
+                    <h3>Malowanie</h3>
+                    <p>Świeża warstwa farby to szybki sposób na zupełnie nowe wnętrze.</p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">📐</div>
+                    <h3>Układanie podłóg</h3>
+                    <p>Profesjonalne układanie paneli, deski czy parkietu.</p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">🛁</div>
+                    <h3>Remonty łazienek</h3>
+                    <p>Kompleksowe remonty łazienek - od wymiany płytek po montaż armatury.</p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">🔌</div>
+                    <h3>Hydraulika i elektryka</h3>
+                    <p>Wszystkie niezbędne prace instalacyjne.</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">🚪</div>
+                    <h3>Zabudowy z płyt GK</h3>
+                    <p>Sufity podwieszane, ścianki działowe i inne konstrukcje.</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Sufity podwieszane</h3>
+                    <p>Nowoczesne i estetyczne rozwiązania dla każdego pomieszczenia.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2>Realizacje REMENTOR</h2>
+            <div class="gallery-grid">
+                
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/id/25/600/400" alt="Nowoczesna łazienka">
+                    <div class="overlay">Remont łazienki - Projekt Warszawa Wola</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/id/169/600/400" alt="Salon z nową podłogą">
+                    <div class="overlay">Układanie podłóg w salonie</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/id/292/600/400" alt="Zabudowa kuchni">
+                    <div class="overlay">Kompleksowa modernizacja kuchni</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/id/40/600/400" alt="Świeżo malowane ściany">
+                    <div class="overlay">Malowanie wnętrza - Jasny beż</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/id/296/600/400" alt="Sufit podwieszany z LED">
+                    <div class="overlay">Montaż sufitu podwieszanego</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/id/35/600/400" alt="Nowoczesna elektryka">
+                    <div class="overlay">Instalacje elektryczne i gniazdka</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section" id="quote-form">
+        <div class="container">
+            <h2>Poproś o bezpłatną wycenę</h2>
+            <div class="quote-form-container">
+                <form action="#" method="POST">
+                    
+                    <div class="form-row">
+                        <div>
+                            <label for="quote-name">Imię i Nazwisko:</label>
+                            <input type="text" id="quote-name" name="name" required>
+                        </div>
+                        <div>
+                            <label for="quote-tel">Numer telefonu:</label>
+                            <input type="tel" id="quote-tel" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <label for="quote-email">Adres E-mail:</label>
+                            <input type="email" id="quote-email" name="email" required>
+                        </div>
+                        <div>
+                            <label for="property-type">Rodzaj nieruchomości:</label>
+                            <select id="property-type" name="property_type" required>
+                                <option value="">Wybierz...</option>
+                                <option value="mieszkanie">Mieszkanie</option>
+                                <option value="dom">Dom</option>
+                                <option value="lokal">Lokal użytkowy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label style="display: block; margin-bottom: 10px;">Jakie usługi Cię interesują? (Wybierz minimum jedną)</label>
+                        <label><input type="checkbox" name="service[]" value="malowanie"> Malowanie</label>
+                        <label><input type="checkbox" name="service[]" value="podlogi"> Podłogi</label>
+                        <label><input type="checkbox" name="service[]" value="lazienka"> Remont łazienki</label>
+                        <label><input type="checkbox" name="service[]" value="hydraulika"> Hydraulika/Elektryka</label>
+                        <label><input type="checkbox" name="service[]" value="gk"> Zabudowy GK</label>
+                        <label><input type="checkbox" name="service[]" value="inne"> Inne</label>
+                    </div>
+
+                    <label for="quote-details">Szczegóły i wymiary projektu:</label>
+                    <textarea id="quote-details" name="details" required></textarea>
+
+                    <button type="submit">Poproś o Wycenę</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Skontaktuj się z nami!</h2>
+            <div class="contact-content">
+                
+                <div class="contact-info">
+                    <h3>Dane Kontaktowe</h3>
+                    
+                    <div class="info-item">
+                        <strong>📞</strong>
+                        <a href="tel:+48123456789" style="color: #555; text-decoration: none;">+48 123 456 789</a>
+                    </div>
+                    
+                    <div class="info-item">
+                        <strong>📧</strong>
+                        <a href="mailto:kontakt@rementor.pl" style="color: #555; text-decoration: none;">kontakt@rementor.pl</a>
+                    </div>
+                    
+                    <div class="info-item">
+                        <strong>📍</strong>
+                        <span>ul. Remontowa 5, 00-001 Warszawa</span>
+                    </div>
+
+                    <div class="social-media">
+                        <h3>Obserwuj nas</h3>
+                        <a href="#" target="_blank" title="Facebook">📘</a>
+                        <a href="#" target="_blank" title="Instagram">📸</a>
+                        <a href="#" target="_blank" title="LinkedIn">💼</a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Wyślij wiadomość</h3>
+                    <form action="#" method="POST">
+                        <label for="c-name">Imię i Nazwisko:</label>
+                        <input type="text" id="c-name" name="name" required>
+
+                        <label for="c-email">Adres E-mail:</label>
+                        <input type="email" id="c-email" name="email" required>
+                        
+                        <label for="c-subject">Temat:</label>
+                        <input type="text" id="c-subject" name="subject">
+
+                        <label for="c-message">Treść Wiadomości:</label>
+                        <textarea id="c-message" name="message" required></textarea>
+
+                        <button type="submit">Wyślij Wiadomość</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 REMENTOR - Kompleksowe Usługi Remontowe. Wszelkie prawa zastrzeżone.
+        </div>
+    </footer>
+
+</body>
+</html>

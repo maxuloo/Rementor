@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMENTOR - Kontakt</title>
+    <style>
+        /* DEFINICJA GŁÓWNYCH KOLORÓW (SPÓJNOŚĆ) */
+        :root {
+            --primary-color: #008080; /* Szmaragdowy/Turkusowy - główny akcent */
+            --secondary-color: #4CAF50; /* Zielony - dla CTA */
+            --light-bg: #f5f5f5; /* Jasne tło */
+            --text-dark: #333;
+            --text-light: #555;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.15);
+            --footer-bg: #222; /* Ciemne tło dla stopki */
+        }
+
+        /* RESET STYLI */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* GŁÓWNY KONTENER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* NAGŁÓWEK (HEADER) - ZMODYFIKOWANY DLA SPÓJNOŚCI */
+        header {
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .logo img {
+            height: 28px;
+            margin-right: 10px;
+            filter: hue-rotate(180deg) brightness(0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            margin-left: 30px;
+            font-size: 16px;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* STYL DLA KONTA UŻYTKOWNIKA - DODANY DLA SPÓJNOŚCI */
+        .account-link {
+            background-color: var(--primary-color);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-left: 30px !important;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 128, 128, 0.3);
+        }
+
+        .account-link:hover {
+            background-color: #005f5f;
+            transform: translateY(-2px);
+        }
+        /* KONIEC STYLI NAGŁÓWKA */
+
+        /* STYL DLA SEKCJI KONTAKT - ZMODYFIKOWANY */
+        .contact-section {
+            padding: 80px 0 100px;
+            background-color: var(--light-bg); /* Lekkie tło */
+        }
+
+        .contact-section h1 {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .contact-section h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .contact-content {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+            background: white; /* Tło dla sekcji treści */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+
+        /* STYL INFORMACJI KONTAKTOWYCH */
+        .contact-info h2 {
+            font-size: 28px; /* Większy tytuł */
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px; /* Większy odstęp */
+            font-size: 18px;
+            color: var(--text-light);
+        }
+
+        .info-item strong {
+            margin-right: 15px;
+            font-size: 24px; /* Większe ikony */
+            color: var(--primary-color);
+        }
+        
+        .info-item a, .info-item span {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info-item a:hover {
+            color: var(--primary-color);
+        }
+
+        /* STYL MEDIÓW SPOŁECZNOŚCIOWYCH */
+        .social-media {
+            margin-top: 40px;
+        }
+
+        .social-media h2 {
+             font-size: 24px;
+             color: var(--text-dark);
+        }
+
+        .social-links {
+             margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 20px;
+            font-size: 36px; /* Większe ikony */
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #005f5f;
+            transform: scale(1.1); /* Lekka animacja */
+        }
+        
+        /* STYL FORMULARZA */
+        .contact-form h2 {
+             font-size: 28px;
+             margin-bottom: 30px;
+             color: var(--text-dark);
+        }
+
+        .contact-form form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        .contact-form form input[type="text"],
+        .contact-form form input[type="email"],
+        .contact-form form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px; /* Zaokrąglone pola */
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-form form input:focus,
+        .contact-form form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 128, 128, 0.3); /* Akcent przy focusie */
+        }
+
+        .contact-form form textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .contact-form form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 128, 128, 0.3);
+        }
+
+        .contact-form form button:hover {
+            background-color: #005f5f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 128, 128, 0.4);
+        }
+        
+        /* STYLE DLA STOPKI */
+        footer {
+            background-color: var(--footer-bg);
+            color: white;
+            padding: 40px 0 20px;
+            font-size: 15px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #444;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo img {
+            filter: invert(50%) sepia(30%) saturate(2000%) hue-rotate(140deg); /* Odwrócenie koloru ikony na jasny akcent */
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin-top: 5px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .contact-info strong {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom">
+                REMENTOR
+            </div>
+        <nav class="nav-links">
+                <a href="my.html">O nas</a> 
+                <a href="rementorek.html">Usługi</a>
+                <a href="galeria.html">Galeria</a>
+                <a href="kontakt.html" style="color: var(--primary-color); font-weight: bold;">Kontakt</a> <a href="konto.html" class="account-link">
+                    👤 Moje Konto
+                </a>
+            </nav>
+       </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="container">
+            <h1>Skontaktuj się z nami!</h1>
+            <div class="contact-content">
+                
+                <div class="contact-info">
+                    <h2>Dane Kontaktowe</h2>
+                    
+                    <div class="info-item">
+                        <strong>📞</strong>
+                        <a href="tel:+48123456789">+48 123 456 789</a>
+                    </div>
+                    
+                    <div class="info-item">
+                        <strong>📧</strong>
+                        <a href="mailto:kontakt@rementor.pl">kontakt@rementor.pl</a>
+                    </div>
+                    
+                    <div class="info-item">
+                        <strong>📍</strong>
+                        <span>ul. Remontowa 5, 00-001 Warszawa</span>
+                    </div>
+
+                    <div class="social-media">
+                        <h2>Obserwuj nas</h2>
+                        <div class="social-links">
+                             <a href="https://facebook.com/TwojRementor" target="_blank" title="Facebook">📘</a>
+                             <a href="https://instagram.com/TwojRementor" target="_blank" title="Instagram">📸</a>
+                             <a href="https://linkedin.com/company/TwojRementor" target="_blank" title="LinkedIn">💼</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h2>Wyślij wiadomość</h2>
+                    <form action="#" method="POST">
+                        <label for="name">Imię i Nazwisko:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Adres E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                        
+                        <label for="subject">Temat:</label>
+                        <input type="text" id="subject" name="subject">
+
+                        <label for="message">Treść Wiadomości:</label>
+                        <textarea id="message" name="message" required></textarea>
+
+                        <button type="submit">Wyślij Wiadomość</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-column contact-info">
+                    <div class="footer-logo">
+                        <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom">
+                        REMENTOR
+                    </div>
+                    <p><strong>REMENTOR Sp. z o.o.</strong></p>
+                    <p>ul. Remontowa 5/10, 01-234 Warszawa</p>
+                    <p><strong>Telefon:</strong> +48 123 456 789</p>
+                    <p><strong>Email:</strong> biuro@rementor.pl</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Szybkie Linki</h3>
+                    <a href="my.html">O nas</a>
+                    <a href="rementorek.html">Usługi</a>
+                    <a href="galeria.html">Galeria</a>
+                    <a href="kontakt.html">Kontakt</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Informacje Prawne</h3>
+                    <p class="contact-info">
+                        <strong>NIP:</strong> 525-999-33-00<br>
+                        <strong>REGON:</strong> 142536475<br>
+                        <a href="polityka-prywatnosci.html">Polityka Prywatności</a>
+                        <a href="regulamin.html">Regulamin Usług</a>
+                    </p>
+                </div>
+
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 REMENTOR. Wszelkie prawa zastrzeżone.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

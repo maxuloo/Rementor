@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMENTOR - O nas</title>
+    <style>
+        /* DEFINICJA GŁÓWNYCH KOLORÓW (SPÓJNOŚĆ Z rementorek.html) */
+        :root {
+            --primary-color: #008080; /* Szmaragdowy/Turkusowy - główny akcent */
+            --secondary-color: #4CAF50; /* Zielony - dla CTA */
+            --light-bg: #f5f5f5; /* Jasne tło */
+            --text-dark: #333;
+            --text-light: #555;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.15);
+            --footer-bg: #222; /* Ciemne tło dla stopki */
+        }
+
+        /* RESET STYLI */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* GŁÓWNY KONTENER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* NAGŁÓWEK (HEADER) - ZMODYFIKOWANY DLA SPÓJNOŚCI */
+        header {
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .logo img {
+            height: 28px;
+            margin-right: 10px;
+            filter: hue-rotate(180deg) brightness(0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            margin-left: 30px;
+            font-size: 16px;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* STYL DLA KONTA UŻYTKOWNIKA - DODANY DLA SPÓJNOŚCI */
+        .account-link {
+            background-color: var(--primary-color);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-left: 30px !important;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 128, 128, 0.3);
+        }
+
+        .account-link:hover {
+            background-color: #005f5f;
+            transform: translateY(-2px);
+        }
+        /* KONIEC STYLI NAGŁÓWKA */
+
+        /* STYL DLA NOWEJ SEKCJI O NAS - ZMODYFIKOWANY */
+        .about-section {
+            padding: 100px 0; /* Większy padding */
+            background-color: #ffffff;
+        }
+
+        .about-section h1 {
+            font-size: 44px; /* Większy tytuł */
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            border-left: 5px solid var(--primary-color); /* Użycie zmiennej koloru */
+            padding-left: 20px;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 60px; /* Większy odstęp */
+            align-items: center; /* Wyśrodkowanie pionowe */
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text p {
+            font-size: 18px; /* Większy tekst */
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        .about-text strong {
+            color: var(--primary-color); /* Podświetlenie kluczowych słów */
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Większe zaokrąglenie */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Mocniejszy cień */
+            transition: transform 0.3s;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.02); /* Subtelne powiększenie przy najechaniu */
+        }
+
+        /* Sekcja Wartości (dodana dla lepszej struktury) */
+        .values-section {
+            padding: 60px 0; /* Zmniejszony padding na górze */
+            background-color: var(--light-bg);
+        }
+
+        .values-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .value-item .icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .value-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .value-item p {
+            font-size: 15px;
+            color: #777;
+        }
+        
+        /* NOWE STYLE DLA SEKCJI CERTYFIKATÓW */
+        .certifications-section {
+            padding: 80px 0;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .certifications-section h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .certificate-item {
+            padding: 30px;
+            border: 2px solid var(--primary-color); /* Akcent kolorystyczny */
+            border-radius: 10px;
+            background-color: #f7ffff; /* Bardzo jasne tło */
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .certificate-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 128, 128, 0.2);
+        }
+
+        .certificate-item .cert-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .certificate-item h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-weight: bold;
+        }
+        
+        .certificate-item p {
+            font-size: 15px;
+            color: #666;
+        }
+        /* KONIEC STYLI DLA SEKCJI CERTYFIKATÓW */
+
+
+        /* SEKCJA PARTNERZY */
+        .partners-section {
+            padding: 80px 0; /* Zmniejszony padding na dole przed stopką */
+            background-color: var(--light-bg); /* Zmienione tło dla kontrastu */
+            text-align: center;
+        }
+
+        .partners-section h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-logo {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            transition: box-shadow 0.3s, transform 0.3s;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+
+        .partner-logo:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .partner-logo img {
+            max-width: 80%;
+            max-height: 80px;
+            height: auto;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            filter: grayscale(100%);
+            margin-bottom: 10px;
+        }
+        
+        .partner-logo:hover img {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        .partner-logo p {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        /* STYLE DLA STOPKI */
+        footer {
+            background-color: var(--footer-bg);
+            color: white;
+            padding: 40px 0 20px;
+            font-size: 15px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #444;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo img {
+            filter: invert(50%) sepia(30%) saturate(2000%) hue-rotate(140deg); /* Odwrócenie koloru ikony na jasny akcent */
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin-top: 5px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .contact-info strong {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom">
+                REMENTOR
+            </div>
+            <nav class="nav-links">
+                <a href="my.html" style="color: var(--primary-color); font-weight: bold;">O nas</a>
+                <a href="rementorek.html">Usługi</a>
+                <a href="galeria.html">Galeria</a>
+                <a href="kontakt.html">Kontakt</a>
+                <a href="konto.html" class="account-link"> 👤 Moje Konto
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="about-section">
+        <div class="container">
+            <h1>O nas - Twoi eksperci od remontów</h1>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Firma **REMENTOR** została założona z pasji do tworzenia pięknych i funkcjonalnych przestrzeni. Od lat pomagamy naszym klientom w realizacji ich marzeń o idealnym domu lub mieszkaniu. Nasz zespół składa się z **doświadczonych fachowców**, którzy z najwyższą dbałością o szczegóły zajmą się każdym aspektem Twojego remontu.</p>
+                    <p>Stawiamy na **jakość, terminowość i transparentność**. Wierzymy, że komunikacja jest kluczem do sukcesu, dlatego zawsze jesteśmy do dyspozycji, aby omówić postępy prac i odpowiedzieć na wszelkie pytania. Niezależnie od tego, czy potrzebujesz odświeżenia jednego pokoju, czy kompleksowej metamorfozy całego wnętrza, REMENTOR jest Twoim zaufanym partnerem.</p>
+                    <p>Skontaktuj się z nami już dziś i przekonaj się, jak łatwo i przyjemnie może przebiegać remont! Zapewniamy pełne wsparcie od projektu po finalne wykończenie.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://epedagogika.pl/appFiles/site_141/images/doc/h5RzvOKU7CtgPn8.jpeg" alt="Zdjęcie zespołu REMENTOR">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="container">
+            <h2>Nasze kluczowe wartości</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="icon">🥇</div>
+                    <h3>Jakość bez kompromisów</h3>
+                    <p>Używamy tylko sprawdzonych materiałów i technik, zapewniając trwałość naszych realizacji.</p>
+                </div>
+                <div class="value-item">
+                    <div class="icon">⏱️</div>
+                    <h3>Terminowość i planowanie</h3>
+                    <p>Każdy projekt jest dokładnie zaplanowany, aby ukończyć prace w uzgodnionym harmonogramie.</p>
+                </div>
+                <div class="value-item">
+                    <div class="icon">🤝</div>
+                    <h3>Transparentna współpraca</h3>
+                    <p>Jasne wyceny, stały kontakt i brak ukrytych kosztów. Budujemy relacje na zaufaniu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="certifications-section">
+        <div class="container">
+            <h2>Certyfikaty i Kwalifikacje</h2>
+            <div class="certifications-grid">
+                <div class="certificate-item">
+                    <span class="cert-icon">⭐</span>
+                    <h3>Certyfikat Jakości ISO 9001</h3>
+                    <p>Potwierdza wysokie standardy zarządzania jakością w procesach remontowych.</p>
+                </div>
+                <div class="certificate-item">
+                    <span class="cert-icon">⚡</span>
+                    <h3>Uprawnienia SEP (Elektryczne)</h3>
+                    <p>Nasz zespół posiada wymagane uprawnienia do bezpiecznego wykonywania instalacji elektrycznych.</p>
+                </div>
+                <div class="certificate-item">
+                    <span class="cert-icon">🛡️</span>
+                    <h3>Ubezpieczenie OC Działalności</h3>
+                    <p>Pełne ubezpieczenie odpowiedzialności cywilnej gwarantuje bezpieczeństwo Twojej nieruchomości.</p>
+                </div>
+                <div class="certificate-item">
+                    <span class="cert-icon">💧</span>
+                    <h3>Autoryzowany Montażysta PEX</h3>
+                    <p>Certyfikat producenta potwierdzający kwalifikacje w zakresie instalacji hydraulicznych PEX/PP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-section">
+        <div class="container">
+            <h2>Współpracujemy z najlepszymi</h2>
+            <div class="partners-grid">
+                <div class="partner-logo">
+                    <img src="https://new.proto.pl/wp-content/uploads/2024/05/castorama_logo.jpg" alt="Logo Partner A">
+                    <p>Partner Materiałowy</p>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://images.seeklogo.com/logo-png/8/2/makita-logo-png_seeklogo-87605.png" alt="Logo Sponsor B">
+                    <p>Dostawca Narzędzi</p>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://logotypy.net/wp-content/uploads/2023/10/logo-superhobby-market-budowlany-obi.jpg" alt="Logo Firma C">
+                    <p>Partner materiałowy</p>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://d2wpvj7q27jmaq.cloudfront.net/wp-content/uploads/2019/10/beckers_cover-1.jpg" alt="Logo Dystrybutor D">
+                    <p>Dystrybutor Farb</p>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://banery.komfort.pl/links/landingpage/strony-marek/Barlinek/logo_barlinek.png" alt="Logo Bank E">
+                    <p>Finansowanie podłóg</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-column contact-info">
+                    <div class="footer-logo">
+                        <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom">
+                        REMENTOR
+                    </div>
+                    <p><strong>REMENTOR Sp. z o.o.</strong></p>
+                    <p>ul. Remontowa 5/10, 01-234 Warszawa</p>
+                    <p><strong>Telefon:</strong> +48 123 456 789</p>
+                    <p><strong>Email:</strong> biuro@rementor.pl</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Szybkie Linki</h3>
+                    <a href="my.html">O nas</a>
+                    <a href="rementorek.html">Usługi</a>
+                    <a href="galeria.html">Galeria</a>
+                    <a href="kontakt.html">Kontakt</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Informacje Prawne</h3>
+                    <p class="contact-info">
+                        <strong>NIP:</strong> 525-999-33-00<br>
+                        <strong>REGON:</strong> 142536475<br>
+                        <a href="polityka-prywatnosci.html">Polityka Prywatności</a>
+                        <a href="regulamin.html">Regulamin Usług</a>
+                    </p>
+                </div>
+
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 REMENTOR. Wszelkie prawa zastrzeżone.
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>

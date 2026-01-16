@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMENTOR - Ankieta i Wycena</title>
+    <style>
+        /* --- ZMIENNE I RESET (Zgodne z rementorek.html) --- */
+        :root {
+            --primary-color: #008080; 
+            --secondary-color: #4CAF50;
+            --light-bg: #f5f5f5;
+            --text-dark: #333;
+            --text-light: #555;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.15);
+            --footer-bg: #222;
+            --warning-color: #ff9900;
+        }
+
+        /* MECHANIZM STOPKI NA DOLE (Sticky Footer) */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #f1f7f6; /* Tło z wycena.html */
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        main {
+            flex: 1; /* Popycha stopkę do dołu strony */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAGŁÓWEK (Zgodny z rementorek.html i Zrzutami Ekranu) --- */
+        header {
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 28px;
+            margin-right: 10px;
+            filter: hue-rotate(180deg) brightness(0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* POPRAWIONY PRZYCISK MOJE KONTO (Zgodny ze zrzutem ekranu) */
+        .account-link {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+            padding: 10px 22px !important;
+            border-radius: 25px !important;
+            font-weight: bold !important;
+            box-shadow: 0 4px 8px rgba(0, 128, 128, 0.3) !important;
+            transition: all 0.3s ease !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .account-link:hover {
+            background-color: #005f5f !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 128, 128, 0.4) !important;
+        }
+
+        /* --- PASEK POSTĘPU --- */
+        .progress-bar-container { width: 100%; height: 6px; background: #e0e0e0; }
+        #progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            width: 33%;
+            transition: width 0.5s ease;
+        }
+
+        /* --- KARTA ANKIETY --- */
+        .survey-card {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .step { padding: 40px; display: none; animation: fadeIn 0.4s ease; }
+        .step.active { display: block; }
+
+        .question-box {
+            background: #fcfcfc;
+            border: 1px solid #eee;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Gwiazdki */
+        .stars { display: flex; flex-direction: row-reverse; }
+        .stars input { display: none; }
+        .stars label { font-size: 30px; color: #ddd; cursor: pointer; transition: 0.2s; }
+        .stars input:checked ~ label, .stars label:hover, .stars label:hover ~ label { color: var(--warning-color); }
+
+        .nav-buttons { display: flex; justify-content: space-between; padding: 25px 40px; background: #fafafa; }
+        .btn { padding: 12px 30px; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-next { background: var(--primary-color); color: white; }
+        .btn-prev { background: #eee; color: #777; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- STOPKA (Zgodna z rementorek.html) --- */
+        footer {
+            background-color: var(--footer-bg);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #444;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo img {
+            height: 24px;
+            margin-right: 10px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-column h3 { color: white; margin-bottom: 20px; font-size: 18px; }
+        .footer-column a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .footer-column a:hover { color: var(--primary-color); }
+        .footer-bottom { text-align: center; margin-top: 30px; color: #777; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="rementorek.html" class="logo">
+                <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom"> REMENTOR
+            </a>
+            <nav class="nav-links">
+                <a href="my.html">O nas</a>
+                <a href="rementorek.html">Usługi</a>
+                <a href="galeria.html">Galeria</a>
+                <a href="kontakt.html">Kontakt</a>
+                <a href="#" class="account-link">
+                    <span>👤</span> Moje Konto
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="progress-bar-container">
+        <div id="progress-fill"></div>
+    </div>
+
+    <main>
+        <div class="container">
+            <div class="survey-card">
+                <form id="surveyForm">
+                    <div class="step active">
+                        <h2 style="color: var(--primary-color); margin-bottom: 20px;">1. Jakość Wykonania</h2>
+                        <div class="question-box">
+                            <span>Staranność wykończenia detali</span>
+                            <div class="stars">
+                                <input type="radio" name="q1" id="q1-5"><label for="q1-5">★</label>
+                                <input type="radio" name="q1" id="q1-4"><label for="q1-4">★</label>
+                                <input type="radio" name="q1" id="q1-3"><label for="q1-3">★</label>
+                                <input type="radio" name="q1" id="q1-2"><label for="q1-2">★</label>
+                                <input type="radio" name="q1" id="q1-1"><label for="q1-1">★</label>
+                            </div>
+                        </div>
+                        <div class="question-box">
+                            <span>Czystość po zakończeniu prac</span>
+                            <div class="stars">
+                                <input type="radio" name="q2" id="q2-5"><label for="q2-5">★</label>
+                                <input type="radio" name="q2" id="q2-4"><label for="q2-4">★</label>
+                                <input type="radio" name="q2" id="q2-3"><label for="q2-3">★</label>
+                                <input type="radio" name="q2" id="q2-2"><label for="q2-2">★</label>
+                                <input type="radio" name="q2" id="q2-1"><label for="q2-1">★</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h2 style="color: var(--primary-color); margin-bottom: 20px;">2. Kontakt i Ekipa</h2>
+                        <div class="question-box">
+                            <span>Punktualność pracowników</span>
+                            <div class="stars">
+                                <input type="radio" name="q3" id="q3-5"><label for="q3-5">★</label>
+                                <input type="radio" name="q3" id="q3-4"><label for="q3-4">★</label>
+                                <input type="radio" name="q3" id="q3-3"><label for="q3-3">★</label>
+                                <input type="radio" name="q3" id="q3-2"><label for="q3-2">★</label>
+                                <input type="radio" name="q3" id="q3-1"><label for="q3-1">★</label>
+                            </div>
+                        </div>
+                        <div class="question-box">
+                            <span>Kultura osobista zespołu</span>
+                            <div class="stars">
+                                <input type="radio" name="q4" id="q4-5"><label for="q4-5">★</label>
+                                <input type="radio" name="q4" id="q4-4"><label for="q4-4">★</label>
+                                <input type="radio" name="q4" id="q4-3"><label for="q4-3">★</label>
+                                <input type="radio" name="q4" id="q4-2"><label for="q4-2">★</label>
+                                <input type="radio" name="q4" id="q4-1"><label for="q4-1">★</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h2 style="color: var(--primary-color); margin-bottom: 20px;">3. Podsumowanie</h2>
+                        <div class="question-box" style="display: block;">
+                            <label style="font-weight: bold; margin-bottom: 10px; display: block;">Dodatkowe uwagi:</label>
+                            <textarea style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; height: 100px; resize: none;"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" id="prevBtn" onclick="move(-1)" disabled>Wstecz</button>
+                    <button class="btn btn-next" id="nextBtn" onclick="move(1)">Dalej</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom"> REMENTOR
+                    </div>
+                    <p style="color: #ccc; line-height: 1.6;">
+                        <strong>REMENTOR Sp. z o.o.</strong><br>
+                        ul. Remontowa 5/10, 01-234 Warszawa<br>
+                        <strong>Tel:</strong> +48 123 456 789<br>
+                        <strong>Email:</strong> biuro@rementor.pl
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Szybkie Linki</h3>
+                    <a href="rementorek.html">Usługi</a>
+                    <a href="wycena.html">Wycena Online</a>
+                    <a href="#">Galeria</a>
+                    <a href="#">Kontakt</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Informacje Prawne</h3>
+                    <p style="color: #ccc; font-size: 14px; margin-bottom: 10px;">
+                        NIP: 525-999-33-00<br>
+                        REGON: 142536475
+                    </p>
+                    <a href="#">Polityka Prywatności</a>
+                    <a href="#">Regulamin Usług</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 REMENTOR. Wszelkie prawa zastrzeżone.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let curr = 1;
+        const total = 3;
+
+        function move(n) {
+            const steps = document.querySelectorAll('.step');
+            steps[curr-1].classList.remove('active');
+            curr += n;
+
+            if (curr > total) {
+                alert("Dziękujemy za przesłanie ankiety!");
+                window.location.href = "rementorek.html";
+                return;
+            }
+
+            steps[curr-1].classList.add('active');
+            document.getElementById('prevBtn').disabled = (curr === 1);
+            document.getElementById('nextBtn').innerText = (curr === total) ? "Wyślij" : "Dalej";
+            document.getElementById('progress-fill').style.width = (curr/total)*100 + "%";
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>

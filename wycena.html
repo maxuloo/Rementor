@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMENTOR - Poproś o Wycenę</title>
+    <style>
+        /* ==================================== */
+        /* ZARZĄDZANIE STYLAMI I RESET (Wycinek) */
+        /* ==================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* NAGŁÓWEK (Wycinek) */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 30px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4fb5a9;
+        }
+        
+        .nav-links .hero-button {
+            background-color: #4fb5a9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .nav-links .hero-button:hover {
+            background-color: #3e8e82;
+        }
+
+
+        /* ==================================== */
+        /* STYL SEKCJI FORMULARZA WYCENY (Wycinek) */
+        /* ==================================== */
+        .quote-section {
+            padding: 80px 0;
+            background-color: #f1f7f6;
+            min-height: 80vh;
+        }
+
+        .quote-section h1 {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .quote-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .quote-form-container input[type="text"],
+        .quote-form-container input[type="email"],
+        .quote-form-container input[type="tel"],
+        .quote-form-container input[type="number"], 
+        .quote-form-container select,
+        .quote-form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-row input[type="number"] {
+            margin-bottom: 10px; 
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px; 
+        }
+
+        .form-row > div {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: normal;
+        }
+
+        .quote-form-container button {
+            background-color: #4fb5a9;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .quote-form-container button:hover {
+            background-color: #3e8e82;
+        }
+        
+        /* STYLE DLA WYNIKU WYCENY (Wycinek) */
+        #quote-result {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #4fb5a9;
+            border-radius: 8px;
+            background-color: #e6f5f4;
+            display: none; 
+        }
+        
+        #quote-result h3 {
+            color: #3e8e82;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        #quote-result table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        #quote-result th, #quote-result td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #cce8e5;
+        }
+
+        #quote-result th {
+            background-color: #4fb5a9;
+            color: white;
+        }
+
+        .total-row td {
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #cce8e5;
+        }
+        
+        .section-header {
+            font-weight: bold;
+            color: #4fb5a9;
+            margin: 20px 0 10px 0;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <img src="https://img.icons8.com/material-outlined/24/000000/home--v2.png" alt="Dom">
+                REMENTOR
+            </a>
+            <nav class="nav-links">
+                <a href="my.html">O nas</a>
+                <a href="rementorek.html">Usługi</a> 
+                <a href="galeria.html">Galeria</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="quote-section">
+        <div class="container">
+            <h1>Poproś o bezpłatną wycenę projektu</h1>
+            <div class="quote-form-container">
+                
+                <form id="quote-form" action="send_quote.php" method="POST">
+                    
+                    <div class="form-row">
+                        <div>
+                            <label for="quote-name">Imię i Nazwisko:</label>
+                            <input type="text" id="quote-name" name="Imię_i_Nazwisko" required>
+                        </div>
+                        <div>
+                            <label for="quote-tel">Numer telefonu:</label>
+                            <input type="tel" id="quote-tel" name="Telefon" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <label for="quote-email">Adres E-mail:</label>
+                            <input type="email" id="quote-email" name="Email" required>
+                        </div>
+                        <div>
+                            <label for="property-type">Rodzaj nieruchomości:</label>
+                            <select id="property-type" name="Rodzaj_Nieruchomości" required>
+                                <option value="Nie_wybrano">Wybierz...</option>
+                                <option value="Mieszkanie">Mieszkanie</option>
+                                <option value="Dom">Dom</option>
+                                <option value="Lokal_Użytkowy">Lokal użytkowy</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <label style="display: block; margin-bottom: 10px;">Jakie usługi Cię interesują?</label>
+                        <label><input type="checkbox" name="Usługi[]" value="Malowanie" id="uslugi-malowanie"> Malowanie</label>
+                        <label><input type="checkbox" name="Usługi[]" value="Podlogi" id="uslugi-podlogi"> Podłogi</label>
+                        <label><input type="checkbox" name="Usługi[]" value="Lazienka" id="uslugi-lazienka"> Remont łazienki</label>
+                        <label><input type="checkbox" name="Usługi[]" value="Instalacje" id="uslugi-instalacje"> Hydraulika/Elektryka</label>
+                    </div>
+
+                    <h4 class="section-header">Wymiary pomieszczeń do remontu (w m²):</h4>
+                    <div class="form-row">
+                        <div>
+                            <label for="m2-painting">Powierzchnia ścian/sufitów do malowania (m²):</label>
+                            <input type="number" id="m2-painting" name="Powierzchnia_Malowanie_m2" min="0" value="0">
+                        </div>
+                        <div>
+                            <label for="m2-floors">Powierzchnia podłóg (panele/płytki, m²):</label>
+                            <input type="number" id="m2-floors" name="Powierzchnia_Podlogi_m2" min="0" value="0">
+                        </div>
+                        <div>
+                            <label for="m2-bathroom">Powierzchnia podłogi łazienki (m²):</label>
+                            <input type="number" id="m2-bathroom" name="Powierzchnia_Lazienka_m2" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <h4 class="section-header">Przewidywany standard materiałów:</h4>
+                    <label for="material-standard">Wybierz standard materiałów (wpływa na złożoność i cenę robocizny):</label>
+                    <select id="material-standard" name="Standard_Materiałów" required>
+                        <option value="Standard">Standard (Podstawowe płytki, farby)</option>
+                        <option value="Ekonomiczny">Ekonomiczny (Najprostsze, szybki montaż)</option>
+                        <option value="Premium">Premium (Wielkie formaty, drogie farby, precyzja)</option>
+                    </select>
+
+                    <label for="quote-details">Dodatkowe szczegóły projektu (np. "Okrągła wanna", "Bardzo wysoki sufit"):</label>
+                    <textarea id="quote-details" name="Szczegoly_Projektu" placeholder="Wpisz tutaj szczegóły, których nie ująłeś powyżej."></textarea>
+                    
+                    <input type="hidden" id="calculated-total" name="Calculated_Total">
+
+                    <button type="submit">Generuj i Wyślij Wycenę</button>
+                </form>
+
+                <div id="quote-result">
+                    <h3>✅ Wstępna Kalkulacja Kosztu Robocizny</h3>
+                    <div id="quote-summary">
+                        </div>
+                    <p style="margin-top: 15px; font-size: 14px; color: #a00;">
+                        *Wycena została automatycznie przesłana na podany adres e-mail.
+                    </p>
+                </div>
+                </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            &copy; 2025 REMENTOR - Kompleksowe Usługi Remontowe.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('quote-form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            // --- LOGIKA OBLICZEŃ (IDENTYCZNA JAK WCZEŚNIEJ) ---
+            const STAWKI = {
+                "MALOWANIE_M2": 28, "PANELE_M2": 45, "LISTWY_MB": 15, "PLYTKI_SCIENNE_M2": 120, 
+                "PLYTKI_PODLOGOWE_M2": 100, "DEMONTAZ_RYCZALT": 800, "HYDRAULIKA_RYCZALT": 2500, 
+                "ELEKTRYKA_RYCZALT": 1200, "MONTAZ_ARMATURY_SZT": 350, "PRZENIESIENIE_GNIAZDKA_SZT": 200
+            };
+            
+            const MATERIAL_MULTIPLIERS = {
+                "Ekonomiczny": 0.9, "Standard": 1.0, "Premium": 1.3
+            };
+
+            const m2_malowania = parseFloat(document.getElementById('m2-painting').value) || 0;
+            const m2_podlogi = parseFloat(document.getElementById('m2-floors').value) || 0;
+            const m2_lazienki = parseFloat(document.getElementById('m2-bathroom').value) || 0;
+            const material_standard = document.getElementById('material-standard').value;
+            const multiplier = MATERIAL_MULTIPLIERS[material_standard] || 1.0;
+
+            const uslugi = Array.from(document.querySelectorAll('input[name="Usługi[]"]:checked')).map(cb => cb.value);
+            const details = document.getElementById('quote-details').value.toLowerCase();
+            
+            let suma_kosztow = 0;
+            let summary_rows = [];
+            
+            const getNumberFromDetails = (keyword, fallback = 0) => {
+                const regex = new RegExp(`${keyword}.*?(\\d+)`, 'i');
+                const match = details.match(regex);
+                if (match) {
+                    return parseInt(match[1]);
+                }
+                return fallback;
+            };
+
+            // 1. MALOWANIE
+            if (uslugi.includes("Malowanie") && m2_malowania > 0) {
+                const koszt = m2_malowania * STAWKI["MALOWANIE_M2"] * multiplier;
+                suma_kosztow += koszt;
+                summary_rows.push({opis: `Malowanie ścian/sufitów (${m2_malowania} m²)`, cena: koszt.toFixed(2)});
+            }
+            
+            // 2. REMONT ŁAZIENKI
+            if (uslugi.includes("Lazienka") && m2_lazienki > 0) {
+                const m2_scian = m2_lazienki * 4; 
+                let ryczalty_montaz = (STAWKI["DEMONTAZ_RYCZALT"] + STAWKI["HYDRAULIKA_RYCZALT"] + STAWKI["ELEKTRYKA_RYCZALT"] + (3 * STAWKI["MONTAZ_ARMATURY_SZT"]));
+                suma_kosztow += ryczalty_montaz;
+                summary_rows.push({opis: "Ryczałt: Demontaż/Hydraulika/Elektryka/Montaż armatury", cena: ryczalty_montaz.toFixed(2)});
+
+                let koszt_podloga = m2_lazienki * STAWKI["PLYTKI_PODLOGOWE_M2"] * multiplier;
+                suma_kosztow += koszt_podloga;
+                summary_rows.push({opis: `Układanie płytek podłogowych (${m2_lazienki} m²)`, cena: koszt_podloga.toFixed(2)});
+                
+                let koszt_sciany = m2_scian * STAWKI["PLYTKI_SCIENNE_M2"] * multiplier;
+                suma_kosztow += koszt_sciany;
+                summary_rows.push({opis: `Układanie płytek ściennych (${m2_scian.toFixed(0)} m²)`, cena: koszt_sciany.toFixed(2)});
+            }
+
+            // 3. PODŁOGI (PANELE/PŁYTKI POZA ŁAZIENKĄ)
+            if (uslugi.includes("Podlogi") && m2_podlogi > 0 && !uslugi.includes("Lazienka")) {
+                const mb_listew = m2_podlogi * 2.5; 
+                let koszt_podloga_glowna = m2_podlogi * STAWKI["PANELE_M2"] * multiplier; 
+                suma_kosztow += koszt_podloga_glowna;
+                summary_rows.push({opis: `Ułożenie podłogi (panele/płytki) (${m2_podlogi} m²)`, cena: koszt_podloga_glowna.toFixed(2)});
+
+                let koszt_listew = mb_listew * STAWKI["LISTWY_MB"];
+                suma_kosztow += koszt_listew;
+                summary_rows.push({opis: `Montaż listew przypodłogowych (${mb_listew.toFixed(0)} mb)`, cena: koszt_listew.toFixed(2)});
+            }
+            
+            // 4. INSTALACJE
+            if (uslugi.includes("Instalacje") && !uslugi.includes("Lazienka")) {
+                const szt_gniazdek = getNumberFromDetails('gniazdek');
+                if (szt_gniazdek > 0) {
+                    const koszt = szt_gniazdek * STAWKI["PRZENIESIENIE_GNIAZDKA_SZT"];
+                    suma_kosztow += koszt;
+                    summary_rows.push({opis: `Przeniesienie punktów elektrycznych (${szt_gniazdek} szt.)`, cena: koszt.toFixed(2)});
+                }
+            }
+            // --- KONIEC LOGIKI OBLICZEŃ ---
+            
+            // WYŚWIETLANIE WYNIKÓW I PRZYGOTOWANIE DO WYSYŁKI
+            const resultDiv = document.getElementById('quote-result');
+            const summaryDiv = document.getElementById('quote-summary');
+
+            if (suma_kosztow === 0 || summary_rows.length === 0) {
+                 summaryDiv.innerHTML = '<p style="color: red; font-weight: bold;">Nie udało się automatycznie wyliczyć wstępnej kwoty. Upewnij się, że zaznaczyłeś usługi i podałeś odpowiednie metry kwadratowe.</p>';
+                 resultDiv.style.display = 'block';
+            } else {
+                let tableHTML = `
+                    <p style="margin-bottom: 10px;">Wybrany standard: <strong>${material_standard}</strong> (Mnożnik robocizny: x${multiplier.toFixed(1)})</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Opis Usługi</th>
+                                <th>Koszt Robocizny (PLN)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${summary_rows.map(row => `
+                                <tr>
+                                    <td>${row.opis}</td>
+                                    <td>${row.cena} PLN</td>
+                                </tr>
+                            `).join('')}
+                            <tr class="total-row">
+                                <td>CAŁKOWITY ORIENTACYJNY KOSZT ROBOCIZNY</td>
+                                <td>${suma_kosztow.toFixed(2)} PLN</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+                summaryDiv.innerHTML = tableHTML;
+                resultDiv.style.display = 'block'; 
+
+                // Ustawienie ukrytego pola i automatyczne wysłanie formularza
+                document.getElementById('calculated-total').value = suma_kosztow.toFixed(2);
+                
+                // Aby uniknąć podwójnego wyświetlania, wysyłamy formularz po krótkim opóźnieniu
+                setTimeout(() => {
+                    e.target.submit(); // Wysyła formularz do send_quote.php
+                }, 500); 
+            }
+        });
+    </script>
+
+</body>
+</html>

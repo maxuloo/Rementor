@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMENTOR - Rejestracja do Konta</title>
+    <style>
+        /* RESET I PODSTAWOWE STYLE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9; /* Tło z sekcji usług */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* STYL DLA FORMULARZA REJESTRACJI */
+        .register-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .register-container h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        /* Styl dla logo */
+        .register-logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .register-button {
+            width: 100%;
+            background-color: #4fb5a9; /* Kolor z przycisku HERO, jako alternatywny akcent */
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-button:hover {
+            background-color: #3d9287;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #008080; /* Kolor przycisku z nawigacji */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <span class="register-logo">REMENTOR</span>
+        <h2>Stwórz Nowe Konto</h2>
+        <form action="konto.html" method="GET">
+            
+            <div class="input-group">
+                <label for="name">Imię i Nazwisko</label>
+                <input type="text" id="name" name="name" placeholder="Wprowadź swoje imię i nazwisko" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Adres E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Wprowadź swój e-mail" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Hasło</label>
+                <input type="password" id="password" name="password" placeholder="Minimalnie 8 znaków" required minlength="8">
+            </div>
+
+            <div class="input-group">
+                <label for="confirm-password">Powtórz Hasło</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Potwierdź hasło" required>
+            </div>
+
+            <button type="submit" class="register-button">Zarejestruj się</button>
+            
+        </form>
+
+        <p class="login-link">
+            Masz już konto? <a href="konto.html">Zaloguj się</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
