@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REMENTOR - Rejestracja do Konta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* RESET I PODSTAWOWE STYLE */
         * {
@@ -19,26 +20,35 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            position: relative; /* Potrzebne do pozycjonowania przycisku powrotu */
+            position: relative;
         }
 
-        /* STYL PRZYCISKU POWROTU */
-        .back-home {
+        /* STYL PRZYCISKU POWROTU (LEWY GÓRNY RÓG) */
+        .btn-home {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #333;
+            top: 25px;
+            left: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #4fb5a9; /* Kolor morski z obrazka */
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 50px; /* Zaokrąglone brzegi (pill style) */
             font-weight: bold;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background-color 0.3s;
         }
 
-        .back-home:hover {
-            background-color: #555;
+        .btn-home:hover {
+            background-color: #3d9287;
+            transform: translateY(-2px);
+        }
+
+        .btn-home i {
+            font-size: 18px;
         }
 
         /* STYL DLA FORMULARZA REJESTRACJI */
@@ -124,7 +134,9 @@
 </head>
 <body>
 
-    <a href="rementorek.html" class="back-home">Strona Główna</a>
+    <a href="rementorek.html" class="btn-home">
+        <i class="fa-solid fa-arrow-left"></i> Strona Główna
+    </a>
 
     <div class="register-container">
         <span class="register-logo">REMENTOR</span>
